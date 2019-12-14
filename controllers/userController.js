@@ -1,7 +1,36 @@
-export const join = (req, res) => res.render("join", { pageTitle: "Join" });
-export const login = (req, res) => res.render("login", { pageTitle: "Log In" });
-export const logout = (req, res) =>
-  res.render("logout", { pageTitle: "Log Out" });
+import routes from "../routes";
+
+export const getJoin = (req, res) => {
+  res.render("join", { pageTitle: "Join" });
+};
+
+export const postJoin = (req, res) => {
+  //console.log(req.body);                              console에 가입정보 띄우기
+  const {
+    body: { name, email, password, password2 }
+  } = req;
+  if (password !== password2) {
+    res.status(400);
+    //console.log("같은비밀번호를 입력하세요.");
+    res.render("join", { pageTitle: "Join" });
+  } else {
+    // To Do: Register User
+    // To Do: Log user in
+    res.redirect(routes.home);
+  }
+};
+
+export const getLogin = (req, res) =>
+  res.render("login", { pageTitle: "Log In" });
+export const postLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
+export const logout = (req, res) => {
+  // To Do: Process Log Out
+  res.redirect(routes.home);
+};
+
 export const userDetail = (req, res) =>
   res.render("userDetail", { pageTitle: "User Detail" });
 export const editProfile = (req, res) =>
